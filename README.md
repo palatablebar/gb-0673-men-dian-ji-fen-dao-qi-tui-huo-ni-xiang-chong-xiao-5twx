@@ -15,6 +15,8 @@ docker compose exec -T app pytest -q
 
 同输入与规则版本生成相同批号，只保留一条批次。复核入口 `POST /api/runs/{run_id}/review` 提交当前 `revision`，陈旧提交409。归档包只有一个下载入口 `GET /api/export/{run_id}`，含证据和运行摘要。原始隔离在页面同屏显示。
 
+期末归档凭证在归档页同屏展示，`GET /api/runs/{run_id}/voucher` 下载与页面内容一致的同一份 JSON。凭证内嵌原消费分配快照与当时规则窗口，自包含可复核，原始捕获被覆盖后不留断链。超出保留期（`retention_months`，默认24个月，可 overrides）的会员以 `MBR-` 确定性伪名替代，同批重跑伪名与内容指纹不变；恢复积分、过期损失、待核数量与发布状态逐项勾稽，全部通过才标 `可发布`，否则明确标 `候选`。`POST /api/runs/{run_id}/voucher/publish` 携带当前 `revision` 事务化发布，重复发布同内容幂等，发布失败保留旧版凭证。
+
 SQLite使用命名卷，容器重启后保留历史。要重建演示可在Compose中改用新的卷名称，保留旧卷。
 
 源码在 `app/`，样例在 `sample_data/`，测试在 `tests/`；定义见 `docs/DATA-DICTIONARY.md`，模块和边界测试对应关系见 `docs/DEPTH.md`。输入上限2MB，属于离线复核工具。

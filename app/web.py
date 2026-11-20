@@ -13,4 +13,7 @@ def render(request:Request,key):
         state=store.get(DB_PATH,run_id)
     else:
         state=store.save(DB_PATH,evaluate({'dataset':request.query_params.get('dataset','dirty')}))
-    return templates.TemplateResponse(request=request,name=f'{key}.html',context={'meta':META,'key':key,'state':state,'view':state['views'][key]})
+    context={'meta':META,'key':key,'state':state,'view':state['views'][key]}
+    if key=='archive':
+        context['voucher']=store.effective_voucher(DB_PATH,state['manifest']['run_id'])
+    return templates.TemplateResponse(request=request,name=f'{key}.html',context=context)

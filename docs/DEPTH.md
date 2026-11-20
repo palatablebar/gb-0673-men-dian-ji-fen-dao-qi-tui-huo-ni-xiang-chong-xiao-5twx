@@ -29,6 +29,9 @@
 | TRAP-11 | UTC归一 | 静默错算或证据丢失 | 以可复核规则显式处理 | `app/modules/policy/rules.py` | `tests/test_policy.py::test_utc_real` |
 | TRAP-06 | 全角积分 | 静默错算或证据丢失 | 以可复核规则显式处理 | `app/modules/policy/rules.py` | `tests/test_policy.py::test_fullwidth_points` |
 | TRAP-23 | 权益半开窗 | 静默错算或证据丢失 | 以可复核规则显式处理 | `app/modules/policy/rules.py` | `tests/test_policy.py::test_rule_end_exclusive` |
+| TRAP-25 | 超保留期会员标识暴露 | 凭证原样暴露会员号 | 确定性伪名替代，复核链不断 | `app/modules/archive/rules.py` | `tests/test_voucher.py::test_retention_masks_beyond_period` |
+| TRAP-26 | 原始捕获覆盖后断链 | 凭证引用外部证据悬空 | 原消费与当时规则内嵌自包含 | `app/modules/archive/rules.py` | `tests/test_voucher.py::test_rebuild_after_snapshot_overwritten` |
+| TRAP-27 | 发布失败丢旧版 | 发布中途覆盖旧凭证 | 事务化发布，同内容幂等 | `app/store.py` | `tests/test_voucher.py::test_publish_failure_keeps_old_version` |
 
 ## 对账规则
 

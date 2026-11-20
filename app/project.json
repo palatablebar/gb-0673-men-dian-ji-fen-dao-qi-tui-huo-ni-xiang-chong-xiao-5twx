@@ -58,6 +58,14 @@
     "refunded": "退款",
     "expired": "到期",
     "points_balanced": "积分守恒",
-    "allocations": "回拨批次"
+    "allocations": "回拨批次",
+    "voucher_id": "凭证号",
+    "content_sha": "内容指纹",
+    "expired_loss": "过期损失",
+    "expired_natural": "自然到期",
+    "pending": "待核",
+    "retention_months": "保留期(月)",
+    "published_at": "发布时间",
+    "publication": "发布状态"
   }
 }
